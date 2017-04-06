@@ -179,7 +179,7 @@ SunCalc.getTimes = function (date, lat, lng) {
         Jrise = Jnoon - (Jset - Jnoon);
 
         result[time[1]] = !isFinite(Jrise)? Jrise < 0 : fromJulian(Jrise);
-        result[time[2]] = !isFinite(Jset)? Jrise < 0 : fromJulian(Jset);
+        result[time[2]] = !isFinite(Jset)? Jset < 0 : fromJulian(Jset);
     }
 
     return result;
