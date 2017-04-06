@@ -16,6 +16,13 @@ and [the planets](http://aa.quae.nl/en/reken/hemelpositie.html).
 You can read about different twilight phases calculated by SunCalc
 in the [Twilight article on Wikipedia](http://en.wikipedia.org/wiki/Twilight).
 
+## Changes in this fork
+
+partly merged this patch https://github.com/AlekseyMartynov/suncalc/commit/13d00ddb33b67f9641b2ce95d5cc2274f2fa17d9 to retrieve reasonable values for polar areas where there is no sunrise/sunset at certain times. 
+Removed the toJulianConstrained function - instead if there is no sunrise (and sunset) boolean true is returned if the sun is always up and boolean false if the sun is always down.
+
+Changed calculation in function "toJulian" to consider local timezone offsets and calculate with true UTC times. See here:
+http://stackoverflow.com/questions/11759992/calculating-jdayjulian-day-in-javascript
 
 ## Usage example
 
