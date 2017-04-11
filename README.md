@@ -24,6 +24,8 @@ Removed the toJulianConstrained function - instead if there is no sunrise (and s
 Changed calculation in function "toJulian" to consider local timezone offsets and calculate with true UTC times. See here:
 http://stackoverflow.com/questions/11759992/calculating-jdayjulian-day-in-javascript
 
+To my knowledge this lib now delivers correct times for all regions of the world everytime including polar regions.
+
 ## Usage example
 
 ```javascript
@@ -40,17 +42,6 @@ var sunrisePos = SunCalc.getPosition(times.sunrise, 51.5, -0.1);
 var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
 ```
 
-SunCalc is also available as an NPM package:
-
-```bash
-$ npm install suncalc
-```
-
-```js
-var SunCalc = require('suncalc');
-```
-
-
 ## Reference
 
 ### Sunlight times
@@ -59,7 +50,7 @@ var SunCalc = require('suncalc');
 SunCalc.getTimes(/*Date*/ date, /*Number*/ latitude, /*Number*/ longitude)
 ```
 
-Returns an object with the following properties (each is a `Date` object):
+Returns an object with the following properties (each is a `Date` object or boolean (see Extreme regions)):
 
 | Property        | Description                                                              |
 | --------------- | ------------------------------------------------------------------------ |
@@ -77,6 +68,13 @@ Returns an object with the following properties (each is a `Date` object):
 | `nightEnd`      | night ends (morning astronomical twilight starts)                        |
 | `nauticalDawn`  | nautical dawn (morning nautical twilight starts)                         |
 | `dawn`          | dawn (morning nautical twilight ends, morning civil twilight starts)     |
+
+### Extreme regions
+
+In some cases there is no Date object returned. This can be true for polar regions and close to polar regions where certain twilight phases or even day or night might not be present for example during summer and winter. Instead of a Date object  
+a boolean is returned indicating the reason why the twilight phase doesn't begin or end. `true` is returned if the sun is always up and `false` otherwise.
+
+### Further notes
 
 ```javascript
 SunCalc.addTime(/*Number*/ angleInDegrees, /*String*/ morningName, /*String*/ eveningName)
